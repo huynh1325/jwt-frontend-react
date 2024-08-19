@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Users.scss';
 import { fetchAllUser, deleteUser } from '../../services/userService';
 import ReactPaginate from 'react-paginate';
@@ -26,8 +26,8 @@ const Users = (props) => {
     }, [currentPage]);
 
     const fetchUsers = async () => {
-        let response = await fetchAllUser(currentPage, currentLimit);
 
+        let response = await fetchAllUser(currentPage, currentLimit);
         if (response && response.EC === 0) {
             setTotalPages(response.DT.totalPages);
             setListUsers(response.DT.users);
