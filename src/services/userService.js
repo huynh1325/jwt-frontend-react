@@ -21,7 +21,7 @@ const deleteUser = (user) => {
 }
 
 const fetchGroup = (user) => {
-    return axios.get('/api/v1/group/read')
+    return axios.get('/api/v1/group/read');
 }
 
 const createNewUser = (userData) => {
@@ -32,6 +32,10 @@ const updateCurrentUser = (userData) => {
     return axios.put('/api/v1/user/update', {...userData})
 }
 
+const getUserAccount = () => {
+    return axios.get('/api/v1/account');
+}
+
 export {
-    registerNewUser, loginUser, fetchAllUser, deleteUser, fetchGroup, createNewUser, updateCurrentUser
+    registerNewUser, loginUser, fetchAllUser, deleteUser, fetchGroup, createNewUser, updateCurrentUser, getUserAccount
 }
