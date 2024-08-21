@@ -40,7 +40,7 @@ body {
         color: white !important;
 
         &:hover {
-            color: #61dafb;
+            color: #61dafb !important;
         }
     }
 
@@ -51,7 +51,7 @@ body {
     }
     .dropdown-menu {
         a {
-            color: #212529;
+            color: #212529 !important;
         }
     }
 }
