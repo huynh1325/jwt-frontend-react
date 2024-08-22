@@ -6,6 +6,7 @@ import {
     Route
 } from 'react-router-dom'
 import PrivateRoutes from "./PrivateRoutes";
+import Role from "../components/Role/Role";
 
 const AppRoutes = (props) => {
 
@@ -24,6 +25,7 @@ const AppRoutes = (props) => {
             <Switch>
                 <PrivateRoutes path="/users" component={Users}/>
                 <PrivateRoutes path="/projects" component={Project}/>
+                <PrivateRoutes path="/roles" component={Role}/>
                 <Route path='/login'>
                     <Login />
                 </Route>
