@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import './Role.scss'
 import _ from 'lodash'
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import { createRoles } from '../../services/roleService';
+import TableRole from './TableRole';
 
 const Role = (props) => {
     const dataChildDefault = {url: '', description: '', isValidUrl: true}
+    const childRef = useRef();
 
     const [listChilds, setListChilds] = useState({
         child1: dataChildDefault
@@ -36,12 +38,12 @@ const Role = (props) => {
     const buildDataToPersist = () => {
         let _listChilds = _.cloneDeep(listChilds);
         let result = [];
-        Object.entries(_listChilds).map(([key,child], index) => {
+        Object.entries(_listChilds).map(([key,child], index) => (
             result.push({
                 url: child.url,
                 description: child.description
             })
-        })
+        ))
         return result;
     }
 
@@ -54,6 +56,7 @@ const Role = (props) => {
             let res = await createRoles(data);
             if (res && res.EC === 0) {
                 toast.success(res.EM);
+                childRef.current.fetchListRolesAgain();
             }
         } else {
             toast.error("Input URL must not be empty...")
@@ -67,7 +70,7 @@ const Role = (props) => {
     return (
         <div className='role-container'>
             <div className='container'>
-                <div className='mt-3'>
+                <div className='adding-roles mt-3'>
                     <div className='title-role'><h4>Add a new role...</h4></div>
                     <div className='role-parent'>
                         {
@@ -102,6 +105,11 @@ const Role = (props) => {
                             <button className='btn btn-warning mt-3' onClick={() => handleSave() }>Save</button>
                         </div>
                     </div>
+                </div>
+                <hr />
+                <div className='mt-3 table-role'>
+                    <h4>List Current Roles: </h4>
+                    <TableRole ref={childRef}/>
                 </div>
             </div>
         </div>
